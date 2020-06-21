@@ -17,23 +17,28 @@
 # %% [markdown]
 # Data.
 # %% [codecell]
-data = [4, 9, 3, 6, 2]
+# data = [4, 9, 3, 6, 2]
+data = [80, 324, 2, 3, 5, 2, 4, 3, 15, 2, 19]
 
 # %% [codecell]
 import copy
-def p_solution(list_):
+def gbxxi_solution(list_):
     data_f = copy.deepcopy(list_)
     
     for outer_index in range(len(data_f)-1):
         min_num = data_f[outer_index]
+        check = 0
 
-        for element in data_f[outer_index:]:
+        for inner_index, element in enumerate(data_f[outer_index:]):
             if element < min_num:
+                check += 1
                 min_num = element
-                inner_index = data_f.index(min_num)
-        
-        data_f[inner_index] = data_f[outer_index]
-        data_f[outer_index] = min_num
+                minimum_index = inner_index + outer_index
+
+        if check:
+            data_f[minimum_index] = data_f[outer_index]
+            data_f[outer_index] = min_num
+            
     return data_f
 
 # %% [codecell]
@@ -48,4 +53,5 @@ def amc_solution(list_):
         list_[outer_index], list_[min_index] = list_[min_index], list_[outer_index]
     return list_
 # %% [codecell]
-print(p_solution(data))
+print(gbxxi_solution(data))
+print(amc_solution(data))
